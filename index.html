@@ -1,0 +1,52 @@
+<html><head>
+<title>Landscape Generator - Triangle Strips</title>
+<script src="extras.js"></script>
+<script src="classes.js"></script>
+<script src="main.js"></script>
+
+<script src="2d-noise.js"></script>
+
+<script src="diagram.js"></script>
+<script src="math_functions.js"></script>
+
+<script src="diagram_renderer.js"></script>
+<script src="keyboard.js"></script>
+
+<script src="functions.js"></script>
+<script src="rotations.js"></script>
+<script src="primitive_data.js"></script>
+<style>
+fieldset {
+    
+    width: 500px;float: left;
+}
+input{
+    float:left
+}
+</style>
+</head>
+
+<body onload="setup()">
+    
+
+<canvas id="canvas" style="border:1px black dotted;"></canvas>
+
+<fieldset><legend>Contrast</legend>
+    <input max="10" min="0" type="range" class="slider" value="0" step="0.01" oninput="contrast.alter(this)" 
+    style="width: 400px; border:1px solid #000000; float:left;"></input>
+</fieldset>
+
+<fieldset><legend>Rotate Vectors</legend>
+    <input max="2" min="1" type="range" class="slider" value="1" step=".001" oninput="angler.alter(this)" 
+    style="width: 600px; border:1px solid #000000; float:left;"></input>
+</fieldset>
+
+<fieldset><legend>Scale</legend>
+    <input max="25000" min="1" type="range" class="slider" value="15000" step="1000" oninput="scaler.alter(this)" 
+    style="width: 600px; border:1px solid #000000; float:left;"></input>
+</fieldset>
+<fieldset><legend>Position</legend>
+<input type="text" id="moverInfo" value="" size="100" style="width:500px; height:15px; font-size:10pt;" disabled/>
+<input type="text" id="gameInfo" value="" size="100" style="width: 500px; height:15px; font-size:10pt;" disabled/>
+</fieldset>
+</body></html>
