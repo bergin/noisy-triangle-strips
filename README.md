@@ -1,6 +1,10 @@
 # noisy-triangle-strips
 Landscapes from coherent noise
 
+You can try it out here:
+
+https://bergin.github.io/noisy-triangle-strips/
+
 
 Slide the 'constrast' slider to build the mountains and lakes; 'rotate' alters the landscape (rotates the Perlin noise vectors)
 
