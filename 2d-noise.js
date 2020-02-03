@@ -1,10 +1,7 @@
-
-
 function setupTriangleStrips()
 {
-	var color = 4;
-	myObjects =[], triPoints = [], triPoints1 = [], size = 3;
-    // cube is: point, size, color, distance, type
+	var color = 4, count = 0;
+	myObjects = [], triPoints = [];
  
 	for(var v=0; v<usableGrid -2  ; v+=detail)
 	{
@@ -17,16 +14,14 @@ function setupTriangleStrips()
 				triPoints[2] = calculatedValues[count+1];
 				myObjects.push(new Triangle(triPoints, color)); 
 
-				triPoints1[0] = calculatedValues[count+rowWidth+1 ];
-				triPoints1[1] = calculatedValues[count+1];
-				triPoints1[2] = calculatedValues[count+rowWidth];  
- 
-				myObjects.push(new Triangle(triPoints1, color));   
+				triPoints[0] = calculatedValues[count+rowWidth+1 ];
+				triPoints[1] = calculatedValues[count+1];
+				triPoints[2] = calculatedValues[count+rowWidth];  
+				myObjects.push(new Triangle(triPoints, color));   
 			}
 			count++; 
 		}
 	}
-	count =0;	 
 }
 
 function perlinInit()
@@ -60,7 +55,7 @@ function perlinGrid()
 				 pn += perlinNoise(u*frequency, v *frequency) * (amplitude/frequency);
 			}	
 			if(pn <=0) 	pn = 0;
-			point = new Point(u, pn, v, pn); 
+			point = new Point(parseFloat(u.toFixed(3)), parseFloat(pn.toFixed(3)), parseFloat(v.toFixed(3)), parseFloat(pn.toFixed(3))); 
 			calculatedValues.push(point);
 		}
 }
@@ -80,8 +75,6 @@ function perlinGridBasic()
 			calculatedValues.push(point);
 		}
 }
-
- 
 
 function colorAssigner(value)
 {

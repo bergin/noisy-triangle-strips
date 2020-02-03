@@ -7,11 +7,16 @@ function draw()
     
     for(var t=0; t < myObjects.length; t++) 
     { 
-        Triangle_Helper.scaleProject(myObjects[t]);   // if any div z also cant show, not just frustrum exclusion.
-        if(myObjects[t].visibility)
+        // only scale and draw an Object that can be seen i.e inside Frustrum and dot product >=0. Also that no div z = 0
+        if(myObjects[t].visibility) 
         { 
-            visibles++;
-            Triangle_Helper.drawSelf(ctx, myObjects[t]);
+			Triangle_Helper.scaleProject(myObjects[t]);   
+			
+            if(Triangle_Helper.windowCheck(myObjects[t])) 
+            { 
+                Triangle_Helper.drawSelf(ctx, myObjects[t]);
+                visibles++;
+            }    
         }    
     }
 } 
@@ -38,28 +43,6 @@ function drawLine(ctx, p1, p2, color, thickness)
 	ctx.stroke();
 }
 
-// no longer works with cubes!!
-function drawQuad( ctx, points, fillColor, type, shade)  // from cube only
-{
-	ctx.strokeStyle = "black";
-	ctx.lineWidth = 1;
- 
-    ctx.fillStyle = "rgb("+ colors[fillColor][0] * shade + "," + colors[fillColor][1] * shade + "," + colors[fillColor][2] * shade +")"; //  fillColor;
-	ctx.beginPath();
-                                         
-	ctx.moveTo(points[0].x, points[0].y);
-
-	for(var j=1; j<4; j++) 
-		ctx.lineTo(points[j].x, points[j].y);
-
-	ctx.lineTo(points[0].x, points[0].y);
-    ctx.closePath();
-    
-	if(type=="filled")
-		ctx.fill();
-	 ctx.stroke();
-}
-
 function drawTri( ctx, points, fillColor, type, shade)  // from cube only
 {
 	ctx.strokeStyle = "black";
@@ -82,53 +65,6 @@ function drawTri( ctx, points, fillColor, type, shade)  // from cube only
 	 ctx.stroke();
 }
 
-
-function drawQuadOutline( ctx, points, i, lineWidth, color)  // from cube only
-{
-	ctx.strokeStyle = color;
-	ctx.lineWidth = lineWidth;
-	 
-	ctx.beginPath();
-                                         
-	ctx.moveTo(points[cfd[i][0]].x, points[cfd[i][0]].y);
-
-	for(var j=1; j<4; j++) 
-		ctx.lineTo(points[cfd[i][j]].x, points[cfd[i][j]].y);
-
-	ctx.lineTo(points[cfd[i][0]].x, points[cfd[i][0]].y);
-    ctx.closePath();
-    ctx.stroke();
-}
-
-function drawFace(ctx, points, fillColor, type, shade, outlineOn)  // from cube only
-{
-    ctx.fillStyle = "rgb("+ colors[fillColor][0] * shade + "," +  colors[fillColor][1] * shade + "," + colors[fillColor][2] * shade +")"; //  fillColor;
-   
-    if(outlineOn)
-    {
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-    }
-
-    else
-    { 
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 0;
-    }
-    ctx.beginPath();
-                                                                          
-    ctx.moveTo(points[0].x, points[0].y);
-
-    for(var j=1; j<4; j++)
-        ctx.lineTo(points[j].x, points[j].y);
-
-    ctx.lineTo(points[0].x, points[0].y);
-    ctx.closePath();
-    if(type=="filled")
-        ctx.fill();
-     ctx.stroke();
-}
-
 /*  0 black= 000
     1 blue = 001
 	2 green 010
@@ -145,23 +81,14 @@ function randomColor()
 	return  rndInt(0, colors.length);
 }
 
-function updateInfoBox()
+function updateInfoBox(fps)
 {
     moverInfo = document.getElementById("moverInfo") ; 
     gameInfo = document.getElementById("gameInfo") ; 
    
-    moverInfo.setAttribute("value", moverPoint.textValue() + " // " +  moverVector.textValue() + " // speed:" + 
+    moverInfo.setAttribute("value", Point_Helper.textValue(moverPoint) + " // " + moverVector.textValue() + " // speed:" + 
     speed);
     
-    gameInfo.setAttribute("value",  "objects:" +   myObjects.length + " // visible " + visibles) ;
+    gameInfo.setAttribute("value",  "objects:" +   myObjects.length + " // visible " + visibles + "// FPS: " + fps  ) ;
 
-}
-
-function showAllFacePoints()
-{
-    for(var t=0; t < myObjects.length; t++)
-    {
-        console.log("face: " + t);
-         myObjects[t].show();
-    }
 }
