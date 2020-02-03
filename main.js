@@ -17,7 +17,7 @@ var visibles = 0;
 
 // noise
 
-var detail = 0.050000, gridSize = 250, usableGrid = 3, usableGridInt = usableGrid/detail;
+var detail = 0.20000, gridSize = 250, usableGrid = 12, usableGridInt = usableGrid/detail;
 var gridOfValues = Create2DArray(gridSize),  calculatedValues = Create2DArray(usableGridInt+1);
 
 

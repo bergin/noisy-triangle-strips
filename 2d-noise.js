@@ -39,7 +39,7 @@ function perlinInit()
 	perlinGrid(); 
 }
 
-var maxFrequency = 2, amplitude = 2;
+var maxFrequency = 1, amplitude = 1;
 
 function perlinGrid()
 {
@@ -63,7 +63,7 @@ function perlinGrid()
 
 			if(pn <=0) 	pn = 0;
 		 
-			calculatedValues[xCount][yCount] = new Point(parseFloat(u.toFixed(3)), parseFloat(pn.toFixed(5) -1), parseFloat(v.toFixed(3))); 
+			calculatedValues[xCount][yCount] = new Point(parseFloat(u.toFixed(3)), parseFloat(pn.toFixed(5)), parseFloat(v.toFixed(3))); 
 			xCount++;
 		}
 		xCount=0;
