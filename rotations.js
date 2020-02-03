@@ -72,7 +72,7 @@ function rotateRelativePoint(origin, aPoint)
 
 function relativePoint(p1, p2)
 {
-	return new Point(p2.x - p1.x, p2.y - p1.y,  p2.z - p1.z , 0);
+	return new Point(p2.x - p1.x, p2.y - p1.y,  p2.z - p1.z);
 }
 
 function rotate_yaw(pos, phi)  // rotate in chair, about y axis (up), xz plane altered

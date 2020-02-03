@@ -84,7 +84,7 @@ class Triangle
 	{
 		this.points = [];
 		this.points_org = []; 
-		this.screenPoints = [];
+		//this.screenPoints = [];
 		this.visibility = true;
 		this.dot;  // ie dot normals
 		this.color = color;
@@ -92,7 +92,7 @@ class Triangle
 		//this.sides = [];
 
 		for(var v=0; v<3;v++)
-			this.points_org[v] = new Point(verts[v].x, verts[v].y, verts[v].z, 0) ;
+			this.points_org[v] = new Point(verts[v].x, verts[v].y, verts[v].z) ;
 
 		this.color = colorAssigner(averageYPoints(this.points_org));
 
@@ -100,8 +100,7 @@ class Triangle
 			 Point_Helper.scale(this.points_org[a], objectScale);
 
 			 
-		for(var a=0; a<3; a++)
-			 this.screenPoints[a] = new ScreenPoint(0,0);	 
+		//for(var a=0; a<3; a++)  this.screenPoints[a] = new ScreenPoint(0,0);	 
 			 
 	}
 }
@@ -148,7 +147,7 @@ class Triangle_Helper
 	{ 
 		for(var i=0; i<3; i++)
 		{
-			if(isInsideDrawingWindow(triangle.screenPoints[i]))
+			if(isInsideDrawingWindow(triangle.points[i]))
 				return true;
 			else
 				continue;
@@ -186,7 +185,7 @@ class Triangle_Helper
 		{ 
 			shading = Math.ceil(triangle.dot * 255);
 		
-			drawTri(ctx, triangle.screenPoints, triangle.color, "filled", shading);
+			drawTri(ctx, triangle.points, triangle.color, "filled", shading);
 		}  	
 	}
 
@@ -203,8 +202,8 @@ class Triangle_Helper
 				return;
 			}	
 
-			triangle.screenPoints[i].x =   (pos.x / pos.z ) * rendererScale + halfScrWidth;
-			triangle.screenPoints[i].y =  -(pos.y / pos.z ) * rendererScale + halfScrHeight;
+			triangle.points[i].x =   (pos.x / pos.z ) * rendererScale + halfScrWidth;
+			triangle.points[i].y =  -(pos.y / pos.z ) * rendererScale + halfScrHeight;
         }
 	}
  
@@ -229,12 +228,12 @@ class ScreenPoint
 
 class Point
 {
-	constructor (x, y, z, v)
+	constructor (x, y, z)
 	{
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.value = v;
+		//this.value = v;
 
 	}
 }

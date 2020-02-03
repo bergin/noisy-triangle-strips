@@ -79,17 +79,17 @@ function timer()
 
 function addPosVec(p1, vec)
 {	
-	return new Point(p1.x + vec.i  , p1.y + vec.j  , p1.z + vec.k, 0) ;	
+	return new Point(p1.x + vec.i  , p1.y + vec.j  , p1.z + vec.k) ;	
 }
 
 function addTwoPositions(p, p1)
 {
-    return new Point(p1.x + p.x  , p1.y + p.y  , p1.z + p.z , 0) ;
+    return new Point(p1.x + p.x  , p1.y + p.y  , p1.z + p.z ) ;
 }
 
 function takeawayTwoPositions(p, p1)
 {
-    return new Point(p1.x - p.x  , p1.y - p.y  , p1.z - p.z , 0) ;
+    return new Point(p1.x - p.x  , p1.y - p.y  , p1.z - p.z) ;
 }
 
 function makeVector(p1, p2)
@@ -114,7 +114,7 @@ function vectorAddition(v1, v2)
 
 function positionPlusScalar (p, s)
 {
-    return new Point(p.x + s, p.y + s, p.z +s, 0);
+    return new Point(p.x + s, p.y + s, p.z +scrollY);
 }
     
 function negativeVector(v)

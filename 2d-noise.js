@@ -55,7 +55,7 @@ function perlinGrid()
 				 pn += perlinNoise(u*frequency, v *frequency) * (amplitude/frequency);
 			}	
 			if(pn <=0) 	pn = 0;
-			point = new Point(parseFloat(u.toFixed(3)), parseFloat(pn.toFixed(3)), parseFloat(v.toFixed(3)), parseFloat(pn.toFixed(3))); 
+			point = new Point(parseFloat(u.toFixed(3)), parseFloat(pn.toFixed(3)), parseFloat(v.toFixed(3))); 
 			calculatedValues.push(point);
 		}
 }
