@@ -1,25 +1,24 @@
 function setupTriangleStrips()
 {
-	var color = 4, count = 0;
+	var color = 4;
 	myObjects = [], triPoints = [];
  
-	for(var v=0; v<usableGrid -2  ; v+=detail)
-	{
-		for(var u=0; u<usableGrid -1 ; u+=detail)
-		{		
-			if(u<usableGrid-1-detail)
-			{ 
-				triPoints[0] = calculatedValues[count];
-				triPoints[1] = calculatedValues[count+rowWidth];
-				triPoints[2] = calculatedValues[count+1];
+	for(var  y=0; y<usableGridInt -1; y++)
+	{ 
+		for(var  x=0; x<usableGridInt- 1; x++)
+		{ 
+				triPoints[0] = calculatedValues[x][y];
+				triPoints[1] = calculatedValues[x][y+1];
+				triPoints[2] = calculatedValues[x+1][y] 
+ 
+				
 				myObjects.push(new Triangle(triPoints, color)); 
 
-				triPoints[0] = calculatedValues[count+rowWidth+1 ];
-				triPoints[1] = calculatedValues[count+1];
-				triPoints[2] = calculatedValues[count+rowWidth];  
-				myObjects.push(new Triangle(triPoints, color));   
-			}
-			count++; 
+				triPoints[0] = calculatedValues[x+1][y];
+				triPoints[1] = calculatedValues[x][y+1] 
+				triPoints[2] = calculatedValues[x+1][y+1];
+
+				myObjects.push(new Triangle(triPoints, color));  
 		}
 	}
 }
@@ -40,24 +39,36 @@ function perlinInit()
 	perlinGrid(); 
 }
 
+var maxFrequency = 2, amplitude = 2;
+
 function perlinGrid()
 {
-	calculatedValues =[];
-	var point, pn;
+	var xCount =0, yCount = 0;
+	 //calculatedValues =[ ];
+	var pn, newX = moverPoint.x / objectScale, newY = moverPoint.y / objectScale ;
+	  var newX =0, newY = 0;
 	 
-	for(var v=0; v<usableGrid -1 ; v+=detail)
-		for(var u=0; u<usableGrid -1 ; u+=detail)
+	for(var v=newY; v<newY+usableGrid  ; v+=detail)
+	{ 
+		for(var u=newX; u<newX+usableGrid  ; u+=detail)
 		{		
 			pn=0;
+			 
 			for(var frequency=1; frequency<=maxFrequency; frequency*=2)
 			{ 
 				//pn = perlinNoise(u,v);
 				 pn += perlinNoise(u*frequency, v *frequency) * (amplitude/frequency);
 			}	
+
+
 			if(pn <=0) 	pn = 0;
-			point = new Point(parseFloat(u.toFixed(3)), parseFloat(pn.toFixed(3)), parseFloat(v.toFixed(3))); 
-			calculatedValues.push(point);
+		 
+			calculatedValues[xCount][yCount] = new Point(parseFloat(u.toFixed(3)), parseFloat(pn.toFixed(5) -1), parseFloat(v.toFixed(3))); 
+			xCount++;
 		}
+		xCount=0;
+		yCount++;
+	}	
 }
 
 function perlinGridBasic()

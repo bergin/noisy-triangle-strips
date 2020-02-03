@@ -86,7 +86,7 @@ class Triangle
 		this.points_org = []; 
 		//this.screenPoints = [];
 		this.visibility = true;
-		this.dot;  // ie dot normals
+		this.dot =.5;  // ie dot normals
 		this.color = color;
 		this.distance = 0;  
 		//this.sides = [];
@@ -273,26 +273,42 @@ function RVector(i, j, k)
 	this.j = j;
 	this.k = k;
 	
-	this.reset = function(direction, s)
+	this.reset = function(type, direction, s)
 	{
-		this.i = 0;
-		this.j = 0;
-		this.k = (5 + s) * direction;
+		if(type == 'yaw' || type == 'pitch' || type=='roll')
+		{
+			this.i = 0;
+			this.j = 0;
+			this.k = (5 + s);
+			return;
+		}
+
+		if(type=='move')
+		{ 
+			this.i = 0;
+			this.j = 0;
+			this.k = (5 + s) * direction;
+			return;
+		}
+
+		if(type=='lift')
+		{ 
+			this.i = 0;
+			this.j = (5 + s) * direction  ;
+			this.k = 0;
+			return;
+		}
+
+		if(type=='side')
+		{ 
+			this.i = (5+s) * direction;
+			this.j = 0;
+			this.k = 0;
+			return;
+		}
+
 	}
-	
-	this.lift = function(direction, s)
-	{
-		this.i = 0;
-		this.j = (5 + s) * direction  ;
-		this.k = 0;
-	}
-	
-    this.side = function(direction, s)
-    {
-        this.i = (5+s) * direction;
-        this.j = 0;
-        this.k = 0;
-    }
+ 
     
 	this.show = function()
 	{

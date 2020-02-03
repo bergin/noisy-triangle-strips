@@ -46,13 +46,15 @@ function alter_mover_position()
 	
 	if(KBI.up)
 	{ 
-		calculateFrustrum(-1, "lift");
+		// if > 180 -1
+		calculateFrustrum(1, "lift");
 		return;
 	}
 	
 	if(KBI.down)
 	{ 
-		calculateFrustrum(1, "lift");	
+		//if > 360 1
+		calculateFrustrum(-1, "lift");	
 		return;
 	}
 

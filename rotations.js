@@ -61,6 +61,8 @@ function rotateVector_roll(vec, psi)  // bank left / right in car, about z axis 
 }
 
 // Rotation of points around moverPoint
+//rotateRelativePoint(moverPoint, triangle.points_org[i]);
+
 function rotateRelativePoint(origin, aPoint) 
 {
 	var relPoint = relativePoint(origin, aPoint);

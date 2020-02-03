@@ -39,8 +39,7 @@ function normalise(v1)
 	v1.i = v1.i/m;
 	v1.j = v1.j/m;
     v1.k = v1.k/m;
-    if(m > -0.1 && m <.1 )
-        alert();
+  //  if(m > -0.1 && m <.1 )  alert();
 	return v1;
 }
 

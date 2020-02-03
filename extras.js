@@ -44,11 +44,11 @@ angler.alter = function(element)
 
  
 
-function Create2DArray(gridWidth)
+function Create2DArray(size)
 {
 	var arr = [];
   
-	for (var i=0;i<gridWidth;i++) 
+	for (var i=0;i<size;i++) 
 	{
 	   arr[i] = [];
 	}

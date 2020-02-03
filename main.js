@@ -16,10 +16,9 @@ var theOrigin = new Point(0,0,0), rendererScale = 800, objectScale =15000;
 var visibles = 0;
 
 // noise
-var maxFrequency = 1, amplitude = 1;
-var detail = 0.20000, gridSize = 50, usableGrid = 10;
-var rowWidth = (usableGrid-1)/detail;
-var gridOfValues = Create2DArray(gridSize), n =[], calculatedValues = [];
+
+var detail = 0.050000, gridSize = 250, usableGrid = 3, usableGridInt = usableGrid/detail;
+var gridOfValues = Create2DArray(gridSize),  calculatedValues = Create2DArray(usableGridInt+1);
 
 
 var mag = 0, gAngles=0; 
@@ -29,20 +28,19 @@ var deg = 180 / Math.PI, rad = Math.PI / 180.0, my360 =  Math.PI*2 ;
 var detailer = {};
 var myAngle=1;
 
-var fps, thisLoop, lastLoop = performance.now();
+var  thisLoop, lastLoop = performance.now();
  
 
 
 function loops()
 {  
-    thisLoop =  performance.now();
-    fps = 1000 / (thisLoop - lastLoop);
-    lastLoop = thisLoop;
+    
 
-    updateInfoBox(fps.toFixed(2));
+    updateInfoBox(fpsPerformance());
 
     if(KBI.isUserActive())              // look for keyboard input
     { 
+        //perlinGrid();  setupTriangleStrips();
         alter_mover_position();	         // and calculate frustrum
         draw();
     }
@@ -101,19 +99,14 @@ function calculateFrustrum(direction, action)
 
 function alterMoverPointAndVector(moveDirection, type)  
 {
-    if(type=="move")
-         moverVector.reset(moveDirection, speed);  
-    if(type=="side")     
-        moverVector.side(moveDirection, speed);
-    if(type=="lift")     
-        moverVector.lift(moveDirection, speed);
-    if(type == "yaw" || type == "pitch" || type=="roll")    
-        moverVector.reset(1, speed);         
-    
+    moverVector.reset(type, moveDirection, speed);  
     rotateVector(moverVector); 
-    
+
     if(type=="move" || type =="side" || type =="lift")
-        moverPoint = addPosVec(moverPoint, moverVector ); 
+    { 
+        moverPoint = addPosVec(moverPoint, moverVector); 
+    }
+    return;
 }
 
 function init()
@@ -130,9 +123,17 @@ function init()
 	
     // where the user is
   
-     moverPoint =  new Point(25000,  15500, -17000);
-   // moverPoint =  new Point(25000,  0, -17000);
+    moverPoint =  new Point(25000,  15500, -17000); 
 	moverVector = new RVector(0, 0, 5);
     moverDirection = new Direction(0, 0, 0);
     counter = 0;  
+}
+
+function fpsPerformance()
+{
+
+    thisLoop =  performance.now();
+    var fps = 1000 / (thisLoop - lastLoop);
+    lastLoop = thisLoop;
+    return fps.toFixed(2);
 }
